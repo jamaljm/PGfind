@@ -13,8 +13,37 @@
 }
 .login-head{
     width: 100%;
-    background: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    
+}
+.login-head h1{
+    margin-top: 30px;
+}
+.login-button{
+    width: 50%;
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 30px 20px;
+}
+.login-button button{
+    background: #d0d0d0;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    width: 80%;
+    background: #e6e6e6;
+    border-radius: 20px;
+    border: none;
+    justify-content: center;
+}
+.login-button button img{
+    width: 30px;
+    height: 30px;
 }
