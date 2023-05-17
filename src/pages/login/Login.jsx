@@ -3,12 +3,18 @@ import "./login.css";
 import google from "../../images/google.png";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../../firebase";
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function Login() {
+
+
   const provider = new GoogleAuthProvider();
   const auth = getAuth(app);
+
+
+  const navigate = useNavigate();
 
   async function handleSignIn() {
 
@@ -19,7 +25,8 @@ export default function Login() {
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
-    console.log(user)
+    console.log(user.displayName)
+    navigate("/dashboard")
     // IdP data available using getAdditionalUserInfo(result)
     // ...
   }).catch((error) => {
@@ -27,7 +34,7 @@ export default function Login() {
     const errorCode = error.code;
     const errorMessage = error.message;
     // The email of the user's account used.
-    const email = error.customData.email;
+    // const email = error.customData.email;
     // The AuthCredential type that was used.
     const credential = GoogleAuthProvider.credentialFromError(error);
     // ...
