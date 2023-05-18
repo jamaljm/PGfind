@@ -12,7 +12,6 @@ export default function Login() {
             Find your perfect PG in seconds with PGFind <br></br>The ultimate
             time-saving app for locating nearby PG!
           </p>
-         
         </div>
         <div className="login-button">
           <button className="login-btn">
