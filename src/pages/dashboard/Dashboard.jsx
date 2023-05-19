@@ -23,7 +23,32 @@ export default function Dashboard() {
         <div className="dashboard-cont">
           <div className="side-bar"></div>
           <div className="main-cont"></div>
-          <div className="right-bar"></div>
+          <div class="right-bar">
+            <div class="addpg">
+              <h2>Add Your PG</h2>
+              <div>
+                <label>Name:</label> <br/>
+                <input type="text" id="name" name="name" />
+                <br/>
+                <label> Image:</label> <br/>
+                <input type="file" accept="image/*" />
+                <br/>
+                <label>Address:</label> <br/>
+                <input id="address" name="address"></input>
+                <br/>
+                <label>Facilities:</label> <br/>
+                <input type="text" id="facilities" name="facilities" />
+                <br/>
+                <label>Rent:</label> <br/>
+                <input type="number" id="rent" name="rent" />
+                <br/>
+                <label>Phone Number:</label> <br/>
+                <input type="tel" id="phone" name="phone" />
+                <br/>
+                <button>Submit</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
