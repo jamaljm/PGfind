@@ -1,7 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./Dashboard.css";
 import logo from "../../images/logo.png";
+import { app, database, storage } from "../../firebase";
+import { collection, addDoc } from "firebase/firestore";
+
 import { AuthContext } from "../../context";
+import { useState } from "react";
+
+import { uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref } from "firebase/storage";
 
 export default function Dashboard() {
   const { user } = useContext(AuthContext);
@@ -17,14 +24,65 @@ export default function Dashboard() {
   };
 
   const [pg, setPg] = useState(initialvalue);
+  const [urlkey, seturlkey] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPg({ ...pg, [name]: value });
-    console.log(pg);
+
   };
 
+
+  // handle file input changes
+  const [file, setFile] = useState(null);
+
+  const handleFileInputChange = (event) => {
+    setFile(event.target.files[0]);
+    console.log(event.target.files[0]);
+    
+  };
+
+
+  const handleform = () => {
+      const PGImageRef = ref(storage, `images/${file.name}`);
+      console.log("uploading:");
   
+      console.log(file);
+      uploadBytes(PGImageRef, file).then((snapshot) => {
+        
+        
+        
+        getDownloadURL(PGImageRef)
+          .then((url) => {  
+            seturlkey(url);
+            setPg({ ...pg, photo: url });
+            console.log(url);
+            
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+
+  
+    };
+
+
+  const handleAddDoc = () => {
+    const dbInstance = collection(database, "pg");
+  
+            addDoc(dbInstance, {
+              ...pg,
+            });
+
+  };
+
+
+  
+
+// console.log(file);
+//   console.log(pg);
+
 
   if (user) {
     return (
@@ -56,8 +114,17 @@ export default function Dashboard() {
                   <br />
 
                   <label> Image:</label> <br />
-                  <input type="file" accept="image/*" />
+                  <input type="file" 
+                
+                
+                onChange={(event) => handleFileInputChange(event)}
+
+                  accept="image/*" />
                   <br />
+                  <button  onClick={handleform} type="button">Upload</button>
+                  <br />
+                  <br />
+
                   <label>Address:</label> <br />
                   <input
                     id="address"
@@ -93,7 +160,9 @@ export default function Dashboard() {
                     onChange={handleChange}
                   />
                   <br />
-                  <button type="submit">Submit</button>
+
+                  <button  onClick={handleAddDoc} type="button">Submit</button>
+
                 </div>
             </div>
           </div>
