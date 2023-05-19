@@ -24,13 +24,7 @@ export default function Dashboard() {
     console.log(pg);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Perform any necessary actions with the form data (e.g., submit to server)
-    console.log(pg);
-    // Reset the form fields
-    setPg(initialvalue);
-  };
+  
 
   if (user) {
     return (
