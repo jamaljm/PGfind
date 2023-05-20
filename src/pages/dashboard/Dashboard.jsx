@@ -98,72 +98,94 @@ export default function Dashboard() {
         </div>
         <div className="dashboard-cont">
           <div className="side-bar"></div>
-          <div className="main-cont"></div>
+          <div className="main-cont">
+
+
+            <div className="card">
+              <div className="card-img">
+                <img src=""></img>
+              </div>
+              <div className="card-cont">
+                <div className="card-l">
+                  <h1>Pg name</h1>
+                  <p>address</p>
+                  <p>phone number</p>
+                  <p>features</p>
+                  <h2>price</h2>
+                </div>
+                <div className="card-r">
+                  <img src=""></img>
+                  <p>Owner name</p>
+                </div>
+              </div>
+            </div>
+
+            
+          </div>
           <div className="right-bar">
             <div className="addpg">
               <h2>Add Your PG</h2>
-                <div>
-                  <label>PG Name:</label> <br />
-                  <input
-                    type="text"
-                    value={pg.pg_name}
-                    name="pg_name"
-                    onChange={handleChange}
-                    id="name"
-                  />
-                  <br />
-
-                  <label> Image:</label> <br />
-                  <input type="file" 
-                
-                
-                onChange={(event) => handleFileInputChange(event)}
-
-                  accept="image/*" />
-                  <br />
-                  <button  onClick={handleform} type="button">Upload</button>
-                  <br />
-                  <br />
-
-                  <label>Address:</label> <br />
-                  <input
-                    id="address"
-                    name="address"
-                    value={pg.address}
-                    onChange={handleChange}
-                  />
-                  <br />
-                  <label>Facilities:</label> <br />
-                  <input
-                    type="text"
-                    id="facilities"
-                    name="facilities"
-                    value={pg.facilities}
-                    onChange={handleChange}
-                  />
-                  <br />
-                  <label>Rent:</label> <br />
-                  <input
-                    type="number"
-                    id="rent"
-                    name="rent"
-                    value={pg.rent}
-                    onChange={handleChange}
-                  />
-                  <br />
-                  <label>Phone Number:</label> <br />
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={pg.phone}
-                    onChange={handleChange}
-                  />
-                  <br />
-
-                  <button  onClick={handleAddDoc} type="button">Submit</button>
-
-                </div>
+              <div>
+                <label>PG Name:</label> <br />
+                <input
+                  type="text"
+                  value={pg.pg_name}
+                  name="pg_name"
+                  onChange={handleChange}
+                  id="name"
+                />
+                <br />
+                <label> Image:</label> <br />
+                <input
+                  type="file"
+                  onChange={(event) => handleFileInputChange(event)}
+                  accept="image/*"
+                />
+                <br />
+                <button onClick={handleform} type="button">
+                  Upload
+                </button>
+                <br />
+                <br />
+                <label>Address:</label> <br />
+                <input
+                  id="address"
+                  name="address"
+                  value={pg.address}
+                  onChange={handleChange}
+                />
+                <br />
+                <label>Facilities:</label> <br />
+                <input
+                  type="text"
+                  id="facilities"
+                  name="facilities"
+                  value={pg.facilities}
+                  onChange={handleChange}
+                />
+                <br />
+                <label>Rent:</label> <br />
+                <input
+                  type="number"
+                  id="rent"
+                  name="rent"
+                  value={pg.rent}
+                  onChange={handleChange}
+                />
+                <br />
+                <label>Phone Number:</label> <br />
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={pg.phone}
+                  onChange={handleChange}
+                />
+                <br />
+                <button onClick={handleAddDoc} type="button">
+                  Submit
+                </button>
+              </div>
             </div>
           </div>
         </div>
