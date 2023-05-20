@@ -47,7 +47,7 @@ export default function Dashboard() {
       const PGImageRef = ref(storage, `images/${file.name}`);
       console.log("uploading:");
   
-      console.log(file);
+      console.log(file,"hello");
       uploadBytes(PGImageRef, file).then((snapshot) => {
         
         
