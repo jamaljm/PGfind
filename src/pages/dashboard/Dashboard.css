@@ -169,3 +169,7 @@ border-radius: 20px;
   background: #c0c0c0;
 
 }
+.card-l p{
+  font-size: 18px;
+  font-weight: 400;
+}
