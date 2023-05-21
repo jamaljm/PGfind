@@ -100,37 +100,33 @@ export default function Dashboard() {
         </div>
         <div className="dashboard-cont">
           <div className="side-bar">
-            <a href="/">Home</a>
+            <div>
+              <a href="/">Home</a>
+            </div>
           </div>
           <div className="main-cont">
-
-
-
             {/* card */}
 
-
- {data.map((data, index) => (
-        <div className="card" key={index}>
-          <div className="card-img">
-            <img src={data.photo} alt="" />
-          </div>
-          <div className="card-cont">
-            <div className="card-l">
-              <h1>{data.pg_name}</h1>
-              <p>{data.address}</p>
-              <p>{data.phone}</p>
-              <p>{data.facilities}</p>
-              <h2>{data.rent}</h2>
-            </div>
-            <div className="card-r">
-              <img src={data.photo_url} alt="" />
-              <p>{data.owner_name}</p>
-            </div>
-          </div>
-        </div>
-      ))}
-
-
+            {data.map((data, index) => (
+              <div className="card" key={index}>
+                <div className="card-img">
+                  <img src={data.photo} alt="" />
+                </div>
+                <div className="card-cont">
+                  <div className="card-l">
+                    <h1>{data.pg_name}</h1>
+                    <p>{data.address}</p>
+                    <p>{data.phone}</p>
+                    <p>{data.facilities}</p>
+                    <h2>{data.rent}</h2>
+                  </div>
+                  <div className="card-r">
+                    <img src={data.photo_url} alt="" />
+                    <p>{data.owner_name}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
           <div className="right-bar">
             <div className="addpg">
