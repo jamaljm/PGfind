@@ -97,10 +97,10 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="dashboard-cont">
-          <div className="side-bar"></div>
+          <div className="side-bar">
+            <a href="/">Home</a>
+          </div>
           <div className="main-cont">
-
-
             <div className="card">
               <div className="card-img">
                 <img src=""></img>
@@ -119,8 +119,6 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-
-            
           </div>
           <div className="right-bar">
             <div className="addpg">

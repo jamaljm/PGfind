@@ -49,6 +49,7 @@
   background: #e5e5e5;
   border-radius: 20px;
   margin: 10px 20px;
+  justify-content: center;
 }
 .main-cont {
   flex: 4;
@@ -172,4 +173,16 @@ border-radius: 20px;
 .card-l p{
   font-size: 18px;
   font-weight: 400;
+}
+.side-bar a{
+    text-decoration: none;
+    border: 2px solid #000000;
+    border-radius: 20px;
+    padding: 10px 60px;
+    color: black;
+    font-size: 17px;
+}
+.side-bar a:hover{
+    background: black;
+    color: white;
 }
