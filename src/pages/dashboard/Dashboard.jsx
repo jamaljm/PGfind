@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Dashboard.css";
 import logo from "../../images/logo.png";
 import { app, database, storage } from "../../firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 
 import { AuthContext } from "../../context";
 import { useState } from "react";
@@ -11,6 +11,24 @@ import { uploadBytes, getDownloadURL } from "firebase/storage";
 import { ref } from "firebase/storage";
 
 export default function Dashboard() {
+  const [data, setData] = useState([]);
+
+  const fetchPost = async () => {
+    const db = database;
+    await getDocs(collection(db, "pg")).then((querySnapshot) => {
+      const newData = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      console.log(newData, "newData");
+      setData(newData);
+    });
+  };
+
+  useEffect(() => {
+    fetchPost();
+  }, []);
+
   const { user } = useContext(AuthContext);
 
   const initialvalue = {
@@ -20,7 +38,7 @@ export default function Dashboard() {
     facilities: "",
     rent: "",
     phone: "",
-    photo_url: ""
+    photo_url: "",
   };
 
   const [pg, setPg] = useState(initialvalue);
@@ -29,9 +47,7 @@ export default function Dashboard() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setPg({ ...pg, [name]: value });
-
   };
-
 
   // handle file input changes
   const [file, setFile] = useState(null);
@@ -39,50 +55,36 @@ export default function Dashboard() {
   const handleFileInputChange = (event) => {
     setFile(event.target.files[0]);
     console.log(event.target.files[0]);
-    
   };
 
-
   const handleform = () => {
-      const PGImageRef = ref(storage, `images/${file.name}`);
-      console.log("uploading:");
-  
-      console.log(file);
-      uploadBytes(PGImageRef, file).then((snapshot) => {
-        
-        
-        
-        getDownloadURL(PGImageRef)
-          .then((url) => {  
-            seturlkey(url);
-            setPg({ ...pg, photo: url });
-            console.log(url);
-            
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      });
+    const PGImageRef = ref(storage, `images/${file.name}`);
+    console.log("uploading:");
 
-  
-    };
-
+    console.log(file, "hello");
+    uploadBytes(PGImageRef, file).then((snapshot) => {
+      getDownloadURL(PGImageRef)
+        .then((url) => {
+          seturlkey(url);
+          setPg({ ...pg, photo: url });
+          console.log(url);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
+  };
 
   const handleAddDoc = () => {
     const dbInstance = collection(database, "pg");
-  
-            addDoc(dbInstance, {
-              ...pg,
-            });
 
+    addDoc(dbInstance, {
+      ...pg,
+    });
   };
 
-
-  
-
-// console.log(file);
-//   console.log(pg);
-
+  // console.log(file);
+  //   console.log(pg);
 
   if (user) {
     return (
@@ -101,24 +103,34 @@ export default function Dashboard() {
             <a href="/">Home</a>
           </div>
           <div className="main-cont">
-            <div className="card">
-              <div className="card-img">
-                <img src=""></img>
-              </div>
-              <div className="card-cont">
-                <div className="card-l">
-                  <h1>Pg name</h1>
-                  <p>address</p>
-                  <p>phone number</p>
-                  <p>features</p>
-                  <h2>price</h2>
-                </div>
-                <div className="card-r">
-                  <img src=""></img>
-                  <p>Owner name</p>
-                </div>
-              </div>
+
+
+
+            {/* card */}
+
+
+ {data.map((data, index) => (
+        <div className="card" key={index}>
+          <div className="card-img">
+            <img src={data.photo} alt="" />
+          </div>
+          <div className="card-cont">
+            <div className="card-l">
+              <h1>{data.pg_name}</h1>
+              <p>{data.address}</p>
+              <p>{data.phone}</p>
+              <p>{data.facilities}</p>
+              <h2>{data.rent}</h2>
             </div>
+            <div className="card-r">
+              <img src={data.photo_url} alt="" />
+              <p>{data.owner_name}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+
+
           </div>
           <div className="right-bar">
             <div className="addpg">
